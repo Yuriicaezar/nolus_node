@@ -1,13 +1,22 @@
 # nolus_snapshot
 
 
+sudo systemctl stop nolusd
 
+cp $HOME/.nolus/data/priv_validator_state.json $HOME/.nolus/priv_validator_state.json.backup 
 
+nolusd tendermint unsafe-reset-all --home $HOME/.nolus --keep-addr-book 
+curl http://89.163.227.44/snap_nibiru.tar.lz4 | lz4 -dc - | tar -xf - -C $HOME/.nolus
 
+mv $HOME/.nolus/priv_validator_state.json.backup $HOME/.nolus/data/priv_validator_state.json 
 
+sudo systemctl start nolusd
+sudo journalctl -u nolusd -f --no-hostname -o cat
 
 
 #state_sync
+
+
 sudo systemctl stop nolusd
 
 nolusd tendermint unsafe-reset-all --home $HOME/.nolus --keep-addr-book 
