@@ -14,6 +14,14 @@ sudo systemctl start nolusd
 sudo journalctl -u nolusd -f --no-hostname -o cat
 
 
+
+
+
+
+
+
+
+
 #state_sync
 
 
